@@ -1,4 +1,3 @@
-// main.js
 import { fetchImages } from './js/pixabay-api.js';
 import { renderImages, clearGallery } from './js/render-functions.js';
 import iziToast from 'izitoast';
@@ -39,14 +38,17 @@ form.addEventListener('submit', async event => {
 
     if (data.hits.length > 0) {
       renderImages(data.hits);
-      if (data.hits.length < totalHits)
+
+      if (data.hits.length < totalHits) {
         loadMoreButton.classList.remove('hidden');
+      }
     } else {
       iziToast.error({
         title: 'Error',
         message: 'No images found. Please try a different query.',
         position: 'topRight',
       });
+      loadMoreButton.classList.add('hidden');
     }
   } catch (error) {
     console.error(error);
